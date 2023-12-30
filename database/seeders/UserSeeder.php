@@ -1,7 +1,6 @@
 <?php
 namespace Database\Seeders;
 
-use App\Enums\ManagerRole;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -27,7 +26,6 @@ class UserSeeder extends Seeder
       'other_names' => '',
       'phone' => '08033334444',
       'email_verified_at' => now(),
-      'manager_role' => ManagerRole::Admin,
       'password' =>
         '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' // password
     ];
