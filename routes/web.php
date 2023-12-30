@@ -38,21 +38,13 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['prefix' => '/exams'], function () {
-    Route::post('/store', [Web\Exams\ExamController::class, 'store'])
-        ->name('exams.store');
     Route::get('/login', Web\Exams\ExamPage\ExamLoginController::class)
         ->name('exams.login');
     Route::get('/display/{exam:exam_no}', Web\Exams\ExamPage\DisplayExamPageController::class)
         ->name('display-exam-page');
-    Route::post('/pause/{exam}', Web\Exams\ExamPage\PauseExamController::class)
-        ->name('pause-exam');
-    Route::post('/end/{exam}', Web\Exams\ExamPage\EndExamController::class)
-        ->name('end-exam');
     Route::get('/exam-result/{exam:exam_no}', Web\Exams\ExamPage\ExamResultController::class)
         ->name('exam-result');
-    Route::delete('/exams/{exam}/delete', [Web\Exams\ExamController::class, 'destroy'])
-        ->name('exams.destroy');
-    Route::delete('/completed-message', [Web\Exams\ExamController::class, 'examCompletedMessage'])
+    Route::get('/completed-message', [Web\Exams\ExamController::class, 'examCompletedMessage'])
         ->name('exams.completed-message');
 });
 

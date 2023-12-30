@@ -71,7 +71,7 @@ export default function DisplayExam({
       return;
     }
     await webForm.submit((data, web) => {
-      return web.post(route('end-exam', [exam.id]));
+      return web.post(route('api.end-exam', [exam.id]));
     });
     gotoResultPage();
   }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers as Web;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,14 @@ Route::middleware('auth:sanctum')->any('/user', function (Request $request) {
     
 });
 
-Route::group(['middleware' => []], function() {
-    
-    // Route::any('/exam/pause', [\App\Http\Controllers\Exam\ExamController::class, 'pauseExam']);
-    // Route::any('/exam/end', [\App\Http\Controllers\Exam\ExamController::class, 'endExam']);
-    // Route::any('/exam/submit', [\App\Http\Controllers\Exam\ExamController::class, 'submitExam']);
-
-    // Route::any('/institution/event/index', [\App\Http\Controllers\API\EventController::class, 'index']);
-    // Route::any('/institution/event/download', [\App\Http\Controllers\API\EventController::class, 'downloadEventContent']);
-    // Route::any('/institution/event/upload', [\App\Http\Controllers\API\EventController::class, 'uploadEventResult']);
-    
+Route::group(['prefix' => '/exams'], function () {
+    Route::post('/store', [Web\Exams\ExamController::class, 'store'])
+        ->name('exams.store');
+    Route::post('/pause/{exam}', Web\Exams\ExamPage\PauseExamController::class)
+        ->name('pause-exam');
+    Route::post('/end/{exam}', Web\Exams\ExamPage\EndExamController::class)
+        ->name('end-exam');
+        
+    Route::delete('/exams/{exam}/delete', [Web\Exams\ExamController::class, 'destroy'])
+        ->name('exams.destroy');
 });

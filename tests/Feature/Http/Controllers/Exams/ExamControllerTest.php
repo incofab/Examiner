@@ -14,7 +14,7 @@ beforeEach(function () {});
 it('deletes an exam', function () {
   $exam = Exam::factory()->create();
   actingAs(User::factory()->create())
-    ->deleteJson(route('exams.destroy', [$exam]))
+    ->deleteJson(route('api.exams.destroy', [$exam]))
     ->assertStatus(200);
   assertDatabaseMissing('exams', ['id' => $exam->id]);
 });
@@ -23,7 +23,7 @@ it('stores a new exam and exam items', function () {
   $data = Exam::factory()
     ->make()
     ->toArray();
-  postJson(route('exams.store'), [
+  postJson(route('api.exams.store'), [
     ...$data,
     'subject_details' => ExamItem::factory(2)
       ->make()
