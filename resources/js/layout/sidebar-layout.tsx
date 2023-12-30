@@ -13,8 +13,6 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import route from '@/util/route';
 import { Nullable, InstitutionUserType } from '@/types/types';
 import useSharedProps from '@/hooks/use-shared-props';
-import useIsAdmin from '@/hooks/use-is-admin';
-import useInstitutionRoute from '@/hooks/use-institution-route';
 
 interface MenuType {
   label: string;
@@ -28,20 +26,17 @@ interface MenuListType extends MenuType {
 }
 
 export default function SideBarLayout() {
-  const { currentUser, currentInstitution, currentInstitutionUser } =
-    useSharedProps();
-  const isAdmin = useIsAdmin();
-  const { instRoute } = useInstitutionRoute();
+  const { currentUser } = useSharedProps();
   const staffOnly = [InstitutionUserType.Admin, InstitutionUserType.Teacher];
 
   const menus: MenuListType[] = [
     {
       label: 'Dashboard',
-      route: instRoute('dashboard'),
+      route: route('dashboard'),
     },
     {
       label: 'My Results',
-      route: instRoute('students.term-results.index'),
+      route: route('students.term-results.index'),
       roles: [InstitutionUserType.Student],
     },
     {
@@ -50,12 +45,12 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'All Staff',
-          route: instRoute('users.index', { staffOnly: true }),
+          route: route('users.index', { staffOnly: true }),
           roles: [InstitutionUserType.Admin, InstitutionUserType.Teacher],
         },
         {
           label: 'Add Staff',
-          route: instRoute('users.create'),
+          route: route('users.create'),
           roles: [InstitutionUserType.Admin],
         },
       ],
@@ -66,12 +61,12 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'All Students',
-          route: instRoute('students.index'),
+          route: route('students.index'),
           roles: staffOnly,
         },
         {
           label: 'Add Student',
-          route: instRoute('students.create'),
+          route: route('students.create'),
           roles: [InstitutionUserType.Admin],
         },
       ],
@@ -81,7 +76,7 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'All Subject',
-          route: instRoute('courses.index'),
+          route: route('courses.index'),
           roles: [
             InstitutionUserType.Student,
             InstitutionUserType.Admin,
@@ -90,17 +85,17 @@ export default function SideBarLayout() {
         },
         {
           label: 'Add Subject',
-          route: instRoute('courses.create'),
+          route: route('courses.create'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Subject Teachers',
-          route: instRoute('course-teachers.index'),
+          route: route('course-teachers.index'),
           roles: [InstitutionUserType.Admin, InstitutionUserType.Teacher],
         },
         {
           label: 'Recorded Results',
-          route: instRoute('course-result-info.index'),
+          route: route('course-result-info.index'),
           roles: staffOnly,
         },
       ],
@@ -111,32 +106,32 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'All Classes',
-          route: instRoute('classifications.index'),
+          route: route('classifications.index'),
           roles: staffOnly,
         },
         {
           label: 'Add Class',
-          route: instRoute('classifications.create'),
+          route: route('classifications.create'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'All Class Groups',
-          route: instRoute('classification-groups.index'),
+          route: route('classification-groups.index'),
           roles: staffOnly,
         },
         {
           label: 'Student Class Changes',
-          route: instRoute('student-class-movements.index'),
+          route: route('student-class-movements.index'),
           roles: [InstitutionUserType.Admin, InstitutionUserType.Teacher],
         },
         {
           label: 'Class Result',
-          route: instRoute('class-result-info.index'),
+          route: route('class-result-info.index'),
           roles: [InstitutionUserType.Admin, InstitutionUserType.Teacher],
         },
         {
           label: 'Session Result',
-          route: instRoute('session-results.index'),
+          route: route('session-results.index'),
           roles: [InstitutionUserType.Admin, InstitutionUserType.Teacher],
         },
       ],
@@ -147,27 +142,27 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'School Profile',
-          route: instRoute('profile'),
+          route: route('profile'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Pins',
-          route: instRoute('pin-prints.index'),
+          route: route('pin-prints.index'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Assessments',
-          route: instRoute('assessments.index'),
+          route: route('assessments.index'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Cummulative Results',
-          route: instRoute('cummulative-result.index'),
+          route: route('cummulative-result.index'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Result Comments',
-          route: instRoute('result-comment-templates.index'),
+          route: route('result-comment-templates.index'),
           roles: [InstitutionUserType.Admin],
         },
       ],
@@ -178,29 +173,29 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'List Fee Types',
-          route: instRoute('fees.index'),
+          route: route('fees.index'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Add Fee Type',
-          route: instRoute('fees.create'),
+          route: route('fees.create'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'List Fee Payments',
-          route: instRoute('fee-payments.index'),
+          route: route('fee-payments.index'),
           roles: [InstitutionUserType.Admin],
         },
       ],
     },
     {
       label: 'Events',
-      route: instRoute('events.index'),
+      route: route('events.index'),
       roles: [InstitutionUserType.Admin],
     },
     {
       label: 'Settings',
-      route: instRoute('settings.create'),
+      route: route('settings.create'),
       roles: [InstitutionUserType.Admin],
     },
     {
@@ -209,19 +204,19 @@ export default function SideBarLayout() {
       sub_items: [
         {
           label: 'Evaluation Types',
-          route: instRoute('learning-evaluation-domains.index'),
+          route: route('learning-evaluation-domains.index'),
           roles: [InstitutionUserType.Admin],
         },
         {
           label: 'Evaluations',
-          route: instRoute('learning-evaluations.index'),
+          route: route('learning-evaluations.index'),
           roles: [InstitutionUserType.Admin],
         },
       ],
     },
     {
       label: 'Profile',
-      route: instRoute('users.profile', [currentUser]),
+      route: route('users.profile', [currentUser]),
     },
     {
       label: 'Logout',
@@ -273,7 +268,7 @@ export default function SideBarLayout() {
       <SidebarHeader />
       <Menu menuItemStyles={menuItemStyles}>
         {menus.map(function (menu: MenuListType, i: number) {
-          if (menu.roles && !menu.roles.includes(currentInstitutionUser.role)) {
+          if (menu.roles) {
             return;
           }
           if (!menu.sub_items) {
@@ -289,10 +284,7 @@ export default function SideBarLayout() {
           return (
             <SubMenu label={menu.label} key={i}>
               {menu.sub_items.map(function (subItem: MenuListType, i: number) {
-                if (
-                  subItem.roles &&
-                  !subItem.roles?.includes(currentInstitutionUser.role)
-                ) {
+                if (subItem.roles) {
                   return;
                 }
                 return (

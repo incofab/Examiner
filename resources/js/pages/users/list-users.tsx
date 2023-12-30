@@ -1,16 +1,7 @@
 import React from 'react';
 import { User } from '@/types/models';
-import {
-  Button,
-  HStack,
-  IconButton,
-  Spacer,
-  Text,
-  Icon,
-} from '@chakra-ui/react';
+import { Button, HStack, IconButton, Spacer, Icon } from '@chakra-ui/react';
 import DashboardLayout from '@/layout/dashboard-layout';
-import { format } from 'date-fns';
-import { dateFormat } from '@/util/util';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import route from '@/util/route';

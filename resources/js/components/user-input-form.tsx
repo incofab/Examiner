@@ -1,6 +1,5 @@
-import useIsAdmin from '@/hooks/use-is-admin';
 import { WebForm } from '@/hooks/use-web-form';
-import { Gender, InstitutionUserType } from '@/types/types';
+import { Gender } from '@/types/types';
 import {
   FormControl,
   FormErrorMessage,
@@ -27,7 +26,6 @@ interface Props {
 }
 
 export default function UserInputForm({ webForm, forEdit }: Props) {
-  const isAdmin = useIsAdmin();
   return (
     <>
       <FormControl isRequired isInvalid={!!webForm.errors.first_name}>

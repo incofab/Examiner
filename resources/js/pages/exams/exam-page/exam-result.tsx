@@ -6,7 +6,6 @@ import { AcademicCapIcon } from '@heroicons/react/24/solid';
 import { LabelText } from '@/components/result-helper-components';
 import { Div } from '@/components/semantic';
 import { LinkButton } from '@/components/buttons';
-import useInstitutionRoute from '@/hooks/use-institution-route';
 import CenteredBox from '@/components/centered-box';
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 }
 
 export default function ExamResult({ exam, user }: Props) {
-  const { instRoute } = useInstitutionRoute();
   const displayData = [
     { label: 'Exam No', value: exam.exam_no },
     { label: 'Num of Subjects', value: exam.exam_items?.length },
@@ -37,10 +35,6 @@ export default function ExamResult({ exam, user }: Props) {
         </Div>
       }
       breadCrumbItems={[
-        {
-          title: 'Event',
-          href: instRoute('external.events.show', [exam.event_id]),
-        },
         {
           title: 'Exam Result',
         },
@@ -99,7 +93,7 @@ export default function ExamResult({ exam, user }: Props) {
             })}
           </VStack>
           <br />
-          <LinkButton title="Home" href={instRoute('external.home')} />
+          <LinkButton title="Home" href={''} />
         </VStack>
       </CenteredBox>
     </ExamLayout>
