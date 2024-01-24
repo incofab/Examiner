@@ -16,12 +16,13 @@ import {
   VStack,
   Wrap,
   WrapItem,
+  useColorMode,
 } from '@chakra-ui/react';
 import ExamUtil from '@/util/exam/exam-util';
 import ExamLayout from '../exam-layout';
 import useModalToggle from '@/hooks/use-modal-toggle';
 import CalculatorModal from '@/components/modals/calculator-modal';
-import { CalculatorIcon } from '@heroicons/react/24/solid';
+import { CalculatorIcon, MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import { BrandButton } from '@/components/buttons';
 import ExamTimer from '@/util/exam/exam-timer';
 import { formatTime } from '@/util/util';
@@ -47,6 +48,7 @@ export default function DisplayExam({
   const [key, setKey] = useState<string>('0');
   const webForm = useWebForm({});
   const calculatorModalToggle = useModalToggle();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   function updateExamUtil() {
     setKey(Math.random() + '');
@@ -133,6 +135,12 @@ export default function DisplayExam({
       breadCrumbItems={[{ title: `${user?.full_name}`, href: '#' }]}
       rightElement={
         <HStack>
+          <IconButton
+            aria-label={'Toggle light and dark moon'}
+            icon={<Icon as={colorMode === 'dark' ? SunIcon : MoonIcon} />}
+            variant={'ghost'}
+            onClick={toggleColorMode}
+          />
           <IconButton
             icon={<Icon as={CalculatorIcon} />}
             aria-label="Calculator"

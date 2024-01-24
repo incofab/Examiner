@@ -11,9 +11,6 @@ class StoreExamRequest extends FormRequest
 {
   protected function prepareForValidation()
   {
-    $this->merge([
-      'exam_no' => Exam::platformExamNo($this->platform, $this->exam_no)
-    ]);
   }
   /**
    * Determine if the user is authorized to make this request.
@@ -21,6 +18,13 @@ class StoreExamRequest extends FormRequest
   public function authorize(): bool
   {
     return true;
+  }
+
+  protected function passedValidation()
+  {
+    $this->merge([
+      'exam_no' => Exam::platformExamNo($this->platform, $this->exam_no)
+    ]);
   }
 
   /**
@@ -32,13 +36,14 @@ class StoreExamRequest extends FormRequest
   {
     return [
       'platform' => ['required', new Enum(Platform::class)],
-      'exam_no' => ['required', 'string', 'unique:exams,exam_no'],
+      'exam_no' => ['required', 'string'],
       'duration' => ['required', 'integer'],
       'subject_details' => ['required', 'array'],
       'subject_details.*.course_session_id' => ['required', 'integer'],
       'subject_details.*.num_of_questions' => ['nullable', 'integer'],
       'subject_details.*.shuffle' => ['nullable', 'boolean'],
-      'reference' => ['nullable', 'string']
+      'reference' => ['nullable', 'string'],
+      'name' => ['nullable', 'string']
     ];
   }
 }

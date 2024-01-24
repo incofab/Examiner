@@ -25,6 +25,7 @@ class DisplayExamPageController extends Controller
 
     return Inertia::render('exams/exam-page/display-exam', [
       'exam' => $exam,
+      'user' => ['full_name' => $request->name],
       'timeRemaining' => $examHandler->getTimeRemaining(),
       'existingAttempts' =>
         collect($exam->attempts)->toArray() +

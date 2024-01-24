@@ -29,7 +29,10 @@ class UploadExamResultJob implements ShouldQueue
   public function handle(): void
   {
     $url = config("services.platform.upload-exam.{$this->exam->platform}");
-    $res = Http::post($url, $this->exam->toArray());
+    $res = Http::post($url, [
+      ...$this->exam->toArray(),
+      'exam_no' => $this->exam->getOriginalExamNo()
+    ]);
     if (!$res->ok()) {
       info('UploadExamResultJob: Error uploading ' . $this->exam->exam_no);
     }

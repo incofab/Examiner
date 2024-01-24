@@ -39,7 +39,10 @@ class ExamController extends Controller
         );
     }
     DB::commit();
-    $url = URL::signedRoute('display-exam-page', ['exam' => $exam->exam_no]);
+    $url = URL::signedRoute('display-exam-page', [
+      'exam' => $exam->exam_no,
+      'name' => $request->safe()->name
+    ]);
     $exam['exam_items'] = $examItems;
     return $this->ok(['exam' => $exam, 'url' => $url]);
   }
