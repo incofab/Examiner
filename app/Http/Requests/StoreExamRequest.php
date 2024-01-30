@@ -11,6 +11,9 @@ class StoreExamRequest extends FormRequest
 {
   protected function prepareForValidation()
   {
+    // $this->merge([
+    //   'exam_no' => Exam::platformExamNo($this->platform, $this->exam_no)
+    // ]);
   }
   /**
    * Determine if the user is authorized to make this request.
@@ -18,13 +21,6 @@ class StoreExamRequest extends FormRequest
   public function authorize(): bool
   {
     return true;
-  }
-
-  protected function passedValidation()
-  {
-    $this->merge([
-      'exam_no' => Exam::platformExamNo($this->platform, $this->exam_no)
-    ]);
   }
 
   /**

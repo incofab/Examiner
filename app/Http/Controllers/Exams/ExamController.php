@@ -27,7 +27,7 @@ class ExamController extends Controller
     DB::beginTransaction();
     $exam = Exam::query()->firstOrCreate(
       ['exam_no' => $request->exam_no],
-      $request->safe()->except('subject_details')
+      $request->safe()->except('subject_details', 'exam')
     );
     $examItems = [];
     foreach ($request->subject_details as $key => $item) {

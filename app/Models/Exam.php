@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\ExamStatus;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -20,7 +19,8 @@ class Exam extends Model
     'pause_time' => 'datetime',
     'end_time' => 'datetime',
     'meta' => AsArrayObject::class,
-    'attempts' => AsArrayObject::class
+    'attempts' => AsArrayObject::class,
+    'upload_response' => AsArrayObject::class
   ];
 
   // protected function duration(): Attribute
@@ -28,15 +28,15 @@ class Exam extends Model
   //   return Attribute::make(set: fn($value) => $value * 60);
   // }
 
-  static function platformExamNo($platform, $examNo)
-  {
-    return "{$platform}-{$examNo}";
-  }
+  // static function platformExamNo($platform, $examNo)
+  // {
+  //   return "{$platform}-{$examNo}";
+  // }
 
-  function getOriginalExamNo()
-  {
-    return substr($this->exam_no, strlen($this->platform->value));
-  }
+  // function getOriginalExamNo()
+  // {
+  //   return substr($this->exam_no, strlen($this->platform->value));
+  // }
 
   function examItems()
   {

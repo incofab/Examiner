@@ -31,7 +31,7 @@ export default function ExamResult({ exam, user }: Props) {
           <Text fontWeight={'bold'} color={'brand.100'}>
             Congratulations
           </Text>
-          <Text>{`${user.full_name}`}</Text>
+          <Text>{`${user?.full_name}`}</Text>
         </Div>
       }
       breadCrumbItems={[

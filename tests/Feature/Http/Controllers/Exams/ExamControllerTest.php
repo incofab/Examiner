@@ -32,9 +32,6 @@ it('stores a new exam and exam items', function () {
     // ->dump()
     ->assertStatus(200);
 
-  $exam = Exam::where(
-    'exam_no',
-    Exam::platformExamNo($data['platform'], $data['exam_no'])
-  )->first();
+  $exam = Exam::where('exam_no', $data['exam_no'])->first();
   assertNotNull($exam);
 });

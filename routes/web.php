@@ -51,3 +51,15 @@ Route::group(['prefix' => '/exams'], function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::any('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
+Route::get('/upload-pending-exams', function ()
+{
+    $exams = \App\Models\Exam::query()
+        ->whereNull('uploaded_at')
+        ->latest('id')
+        ->with('examItems')
+        ->take(5)
+        ->get();
+        // dd($exams->toArray());
+    $res = \App\Actions\ExamUploader::uploadMultiple($exams);
+    return $res;
+});

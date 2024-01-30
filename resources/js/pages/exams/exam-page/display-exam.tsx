@@ -48,8 +48,11 @@ export default function DisplayExam({
   const [key, setKey] = useState<string>('0');
   const webForm = useWebForm({});
   const calculatorModalToggle = useModalToggle();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, setColorMode } = useColorMode();
 
+  if (colorMode !== 'light') {
+    setColorMode('light');
+  }
   function updateExamUtil() {
     setKey(Math.random() + '');
   }
@@ -135,12 +138,12 @@ export default function DisplayExam({
       breadCrumbItems={[{ title: `${user?.full_name}`, href: '#' }]}
       rightElement={
         <HStack>
-          <IconButton
+          {/* <IconButton
             aria-label={'Toggle light and dark moon'}
             icon={<Icon as={colorMode === 'dark' ? SunIcon : MoonIcon} />}
             variant={'ghost'}
             onClick={toggleColorMode}
-          />
+          /> */}
           <IconButton
             icon={<Icon as={CalculatorIcon} />}
             aria-label="Calculator"

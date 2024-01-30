@@ -97,7 +97,7 @@ export default function ExamLayout({
             </HStack>
           </VStack>
           <HStack spacing={2}>
-            {user && <Avatar size={'sm'} src={avatarUrl(user.full_name)} />}
+            {user && <Avatar size={'sm'} src={avatarUrl(user?.full_name)} />}
             <Div>{rightElement}</Div>
           </HStack>
         </Flex>
