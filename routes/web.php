@@ -46,6 +46,8 @@ Route::group(['prefix' => '/exams'], function () {
         ->name('exam-result');
     Route::get('/completed-message', [Web\Exams\ExamController::class, 'examCompletedMessage'])
         ->name('exams.completed-message');
+    Route::get('/test', Web\Exams\ExamPage\TestExamPageController::class)
+        ->name('exams.test');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -55,7 +57,6 @@ Route::get('/upload-pending-exams', function ()
 {
     $exams = \App\Models\Exam::query()
         ->whereNull('uploaded_at')
-        ->latest('id')
         ->with('examItems')
         ->take(5)
         ->get();

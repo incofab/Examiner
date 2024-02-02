@@ -171,7 +171,7 @@ export default function DisplayExam({
               key={item.id}
               onClick={() => examUtil.getTabManager().setCurrentTabIndex(index)}
             >
-              {item.course_session?.course?.title}
+              {item.course_session?.course?.course_code}
             </Tab>
           ))}
         </TabList>

@@ -85,7 +85,9 @@ export default function ExamResult({ exam, user }: Props) {
                   justify={'space-between'}
                   key={examItem.id}
                 >
-                  <Text flex={1}>{examItem.course_session?.course?.title}</Text>
+                  <Text flex={1}>
+                    {examItem.course_session?.course?.course_code}
+                  </Text>
                   <Text flex={1}>{examItem.num_of_questions}</Text>
                   <Text flex={1}>{examItem.score}</Text>
                 </HStack>

@@ -20,8 +20,8 @@ export interface User extends Row {
 }
 
 export interface Course extends Row {
-  title: string;
-  code: string;
+  course_title: string;
+  course_code: string;
   category: string;
   description: string;
   sessions: CourseSession[];
