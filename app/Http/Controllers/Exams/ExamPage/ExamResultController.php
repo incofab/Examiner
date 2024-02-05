@@ -25,7 +25,11 @@ class ExamResultController extends Controller
     );
 
     if ($exam->event_id) {
-      return redirect(config('services.platform.exam-result.examscholars'));
+      return Inertia::render('message', [
+        'title' => 'Exam Completed',
+        'message' =>
+          'Congratulations!!! You have successfully completed this exam and your result has been submitted to your tutor'
+      ]);
     }
 
     (new RetrieveSubjectDetails($exam))->run();

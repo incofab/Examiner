@@ -39,6 +39,7 @@ class StoreExamRequest extends FormRequest
       'subject_details.*.num_of_questions' => ['nullable', 'integer'],
       'subject_details.*.shuffle' => ['nullable', 'boolean'],
       'reference' => ['nullable', 'string'],
+      'event_id' => ['nullable', 'integer'],
       'name' => ['nullable', 'string']
     ];
   }
