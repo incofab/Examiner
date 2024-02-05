@@ -24,6 +24,10 @@ class ExamResultController extends Controller
       'You cannot view results when exam is still active'
     );
 
+    if ($exam->event_id) {
+      return redirect(config('services.platform.exam-result.examscholars'));
+    }
+
     (new RetrieveSubjectDetails($exam))->run();
 
     if ($exam->status !== ExamStatus::Ended) {

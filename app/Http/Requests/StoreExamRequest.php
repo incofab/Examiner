@@ -33,7 +33,7 @@ class StoreExamRequest extends FormRequest
     return [
       'platform' => ['required', new Enum(Platform::class)],
       'exam_no' => ['required', 'string'],
-      'duration' => ['required', 'integer'],
+      'duration' => ['required', 'numeric'],
       'subject_details' => ['required', 'array'],
       'subject_details.*.course_session_id' => ['required', 'integer'],
       'subject_details.*.num_of_questions' => ['nullable', 'integer'],

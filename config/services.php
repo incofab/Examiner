@@ -41,6 +41,10 @@ return [
     'upload-exam' => [
       'examscholars' => env('UPLOAD_EXAM_EXAMSCHOLARS'),
       'edumanager' => env('UPLOAD_EXAM_EDUMANAGER')
+    ],
+    'exam-result' => [
+      'examscholars' => env('EXAM_RESULT_EXAMSCHOLARS'),
+      'edumanager' => env('EXAM_RESULT_EDUMANAGER')
     ]
   ],
 
