@@ -110,8 +110,10 @@ class ExamHandler
       return;
     }
     $examAttemptFileHandler = ExamAttemptFileHandler::make($this->exam);
+    $totalScorePercent = 0;
     $totalScore = 0;
     $totalNumOfQuestions = 0;
+    $totalNumOfQuestionsPercent = 0;
     DB::beginTransaction();
 
     foreach ($this->exam->examItems as $key => $examItem) {
@@ -127,6 +129,8 @@ class ExamHandler
       ]);
       $totalScore += $score;
       $totalNumOfQuestions += $numOfQuestions;
+      $totalScorePercent += round(($score / $numOfQuestions) * 100, 2);
+      $totalNumOfQuestionsPercent += 100;
     }
 
     $this->exam
@@ -135,8 +139,8 @@ class ExamHandler
         'end_time' => null,
         'time_remaining' => 0,
         'status' => ExamStatus::Ended,
-        'score' => $totalScore,
-        'num_of_questions' => $totalNumOfQuestions,
+        'score' => $totalScorePercent, //$totalScore,
+        'num_of_questions' => $totalNumOfQuestionsPercent, //$totalNumOfQuestions,
         'attempts' => $examAttemptFileHandler->getQuestionAttempts()
       ])
       ->save();
