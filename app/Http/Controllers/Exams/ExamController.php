@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exams;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExamRequest;
 use App\Models\Exam;
+use App\Support\ExamHandler;
 use DB;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -45,6 +46,29 @@ class ExamController extends Controller
     ]);
     $exam['exam_items'] = $examItems;
     return $this->ok(['exam' => $exam, 'url' => $url]);
+  }
+
+  function retrieve(Request $request)
+  {
+    $request->validate(['exam_no' => ['required', 'exists:exams,exam_no']]);
+    $exam = Exam::query()
+      ->where('exam_no', $request->exam_no)
+      ->with('examItems')
+      ->firstOrFail();
+    return $this->ok(['exam' => $exam]);
+  }
+
+  function terminate(Request $request)
+  {
+    $request->validate(['exam_no' => ['required', 'exists:exams,exam_no']]);
+    $exam = Exam::query()
+      ->where('exam_no', $request->exam_no)
+      ->with('examItems')
+      ->firstOrFail();
+
+    ExamHandler::make($exam)->endExam();
+    $exam = $exam->fresh('examItems');
+    return $this->ok(['exam' => $exam]);
   }
 
   function destroy(Exam $exam)

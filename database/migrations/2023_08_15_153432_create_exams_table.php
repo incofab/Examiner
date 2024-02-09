@@ -29,7 +29,7 @@ return new class extends Migration {
       $table->dateTime('start_time')->nullable(true);
       $table->dateTime('pause_time')->nullable(true);
       $table->dateTime('end_time')->nullable(true);
-      $table->float('score', false, true)->nullable(true);
+      $table->float('score')->nullable(true);
       $table->integer('num_of_questions', false, true)->nullable(true);
       $table->string('status')->default(ExamStatus::Pending->value);
       $table->mediumText('attempts')->nullable();

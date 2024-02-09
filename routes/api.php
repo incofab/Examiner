@@ -24,6 +24,10 @@ Route::middleware('auth:sanctum')->any('/user', function (Request $request) {
 Route::group(['prefix' => '/exams'], function () {
     Route::post('/store', [Web\Exams\ExamController::class, 'store'])
         ->name('exams.store');
+    Route::post('/retrieve', [Web\Exams\ExamController::class, 'retrieve'])
+        ->name('exams.retrieve');
+    Route::post('/terminate', [Web\Exams\ExamController::class, 'terminate'])
+        ->name('exams.terminate');
     Route::post('/pause/{exam}', Web\Exams\ExamPage\PauseExamController::class)
         ->name('pause-exam');
     Route::post('/end/{exam}', Web\Exams\ExamPage\EndExamController::class)
