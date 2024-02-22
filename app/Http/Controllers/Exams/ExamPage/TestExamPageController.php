@@ -19,6 +19,12 @@ class TestExamPageController extends Controller
       ->with('examItems')
       ->first();
 
+    if ($request->exam_no) {
+      $exam = Exam::query()
+        ->where('exam_no', $request->exam_no)
+        ->firstOrFail();
+    }
+
     $exam
       ->fill([
         'start_time' => now(),
@@ -37,7 +43,7 @@ class TestExamPageController extends Controller
     // dd(json_encode($exam, JSON_PRETTY_PRINT));
     return Inertia::render('exams/exam-page/display-exam', [
       'exam' => $exam,
-      'user' => ['full_name' => $request->name],
+      'user' => ['full_name' => $request->name ?? 'John Doe'],
       'timeRemaining' => $examHandler->getTimeRemaining(),
       'existingAttempts' =>
         collect($exam->attempts)->toArray() +

@@ -129,7 +129,8 @@ class ExamHandler
       ]);
       $totalScore += $score;
       $totalNumOfQuestions += $numOfQuestions;
-      $totalScorePercent += round(($score / $numOfQuestions) * 100, 2);
+      $totalScorePercent +=
+        $numOfQuestions > 0 ? round(($score / $numOfQuestions) * 100, 2) : 0;
       $totalNumOfQuestionsPercent += 100;
     }
 
